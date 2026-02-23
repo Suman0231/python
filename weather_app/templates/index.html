@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open-Meteo Weather App</title>
+</head>
+<body>
+    <h1>Weather Forecast (Open-Meteo)</h1>
+
+    <form method="POST">
+        <label>Select City:</label>
+        <select name="city" required>
+            <option value="">--Choose a city--</option>
+            {% for city in cities %}
+                <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>
+                    {{ city }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Get Forecast</button>
+    </form>
+
+    <hr>
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+
+    {% if forecast %}
+        <h2>Next 10 Hours Temperature in {{ selected_city }}</h2>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Time</th>
+                <th>Temperature (°C)</th>
+            </tr>
+            {% for time, temp in forecast %}
+            <tr>
+                <td>{{ time }}</td>
+                <td>{{ temp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+</body>
+</html>

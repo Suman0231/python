@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1>Task List</h1>
+
+    <a href="/add">Add New Task</a>
+    <br><br>
+
+    {% for task in tasks %}
+        <div style="border:1px solid black; padding:10px; margin-bottom:10px;">
+            <strong>{{ task[1] }}</strong><br>
+            Status: 
+            {% if task[2] == 1 %}
+                ✔ Completed
+            {% else %}
+                ✘ Not Completed
+            {% endif %}
+            <br>
+            Deadline: {{ task[3] }}<br>
+            Priority: {{ task[4] }}<br><br>
+
+            {% if task[2] == 0 %}
+                <a href="/complete/{{ task[0] }}">Mark as Complete</a>
+            {% endif %}
+
+            <a href="/delete/{{ task[0] }}">Delete</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
